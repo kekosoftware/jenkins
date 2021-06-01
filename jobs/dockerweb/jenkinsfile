@@ -11,7 +11,7 @@ pipeline {
         name_final = "${name_container}${tag_imagen}${puerto_imagen}"        
     }
     stages {
-        stage('stop/rm') {
+          stage('stop/rm') {
 
             when {
                 expression { 
@@ -29,15 +29,12 @@ pipeline {
                 }                    
                                   
             }
-        stage('Initialize'){
-            def dockerHome = tool 'myDocker'
-            env.PATH = "${dockerHome}/bin:${env.PATH}"
-        }
+           
         stage('build') {
             steps {
                 script{
                     sh ''' 
-                    docker build jobs/dockerweb/ -t ${name_imagen}:${tag_imagen}
+                    docker build jobs/dockerweb -t ${name_imagen}:${tag_imagen}
                     '''
                     }
                     
